@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper">
-
+    <resultMap id="TipoItemResult" type="TipoItem">
+        <id property="id" column="ti_id" />
+        <result property="descripcion" column="ti_descripcion" />
+    </resultMap>
     
 
                 

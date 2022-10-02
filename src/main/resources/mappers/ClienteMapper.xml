@@ -4,7 +4,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper">
+    <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
+        select
+        c.nombre as c_nombre,
+        c.documento as c_documento,
+        c.telefono as c_telefono,
+        c.direccion as c_direccion,
+        c.email as c_email,
+        c.vetado as c_vetado,
+        ir.id as ir_id,
+        ir.fechainiciorenta as ir_fechainiciorenta,
+        ir.fechafinrenta as ir_fechafinrenta,
+        i.id as i_id,
+        i.nombre as i_nombre,
+        i.descripcion as i_descripcion,
+        i.fechalanzamiento as i_fechalanzamiento,
+        i.tarifaxdia as i_tarifaxdia,
+        i.formatorenta as i_formatorenta,
+        i.genero as i_genero,
+        ti.id as ti_id,
+        ti.descripcion as ti_descripcion
+        FROM VI_CLIENTES as c
+        left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento
+        left join VI_ITEMS as i on ir.ITEMS_id=i.id
+        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+    </select>
 
+    <resultMap id="ClienteResult" type="Cliente">
+        <id property="documento" column="c_documento" />
+        <result property="nombre" column="c_nombre" />
+        <result property="telefono" column="c_telefono" />
+        <result property="direccion" column="c_direccion" />
+        <result property="email" column="c_email" />
+        <result property="vetado" column="c_vetado" />
+        <collection property="rentados" ofType="ItemRentado" resultMap="ItemRentadoResult" columnPrefix="ir_"></collection>
+    </resultMap>
 
-          	
+    <resultMap id="ItemRentadoResult" type="ItemRentado">
+        <id property="id" column="ir_id" />
+        <result property="fechainiciorenta" column="ir_fechainiciorenta" />
+        <result property="fechafinrenta" column="ir_fechafinrenta" />
+        <association property="item" javaType="Item" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult"/>
+    </resultMap>
+
 </mapper>
