@@ -57,6 +57,11 @@
         where c.documento = #{idcli}
     </select>
 
+    <insert id="agregarItemRentadoACliente" parameterType="map">
+        insert into VI_ITEMRENTADO (CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta)
+        values (#{idcli}, #{idit}, #{fechainicio}, #{fechafin})
+    </insert>
+
     <resultMap id="ClienteResult" type="Cliente">
         <id property="documento" column="c_documento" />
         <result property="nombre" column="c_nombre" />
