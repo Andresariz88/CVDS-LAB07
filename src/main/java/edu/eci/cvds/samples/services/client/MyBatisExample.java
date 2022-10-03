@@ -81,6 +81,7 @@ public class MyBatisExample {
         Item item = new Item(tipo, 639, "Pupito", "Pupito", Date.valueOf("2022-10-02"), 639639, "Pupito", "Pupito");
         //im.insertarItem(item);
         //System.out.println(im.consultarItems());
+        //System.out.println(im.consultarItem(1));
 
         
         sqlss.commit();
