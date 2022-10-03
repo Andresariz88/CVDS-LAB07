@@ -9,6 +9,31 @@
         values (#{item.id}, #{item.nombre}, #{item.descripcion}, #{item.fechaLanzamiento}, #{item.tarifaxDia}, #{item.formatoRenta}, #{item.genero}, #{item.tipo.id})
     </insert>
 
+    <select id="consultarItems" resultMap="ItemResult">
+        select
+        i.id as i_id,
+        i.nombre as i_nombre,
+        i.descripcion as i_descripcion,
+        i.fechalanzamiento as i_fechalanzamiento,
+        i.tarifaxdia as i_tarifaxdia,
+        i.formatorenta as i_formatorenta,
+        i.genero as i_genero
+        from VI_ITEMS as i
+    </select>
+
+    <select id="consultarItem" resultMap="ItemResult" parameterType="map">
+        select
+        i.id as i_id,
+        i.nombre as i_nombre,
+        i.descripcion as i_descripcion,
+        i.fechalanzamiento as i_fechalanzamiento,
+        i.tarifaxdia as i_tarifaxdia,
+        i.formatorenta as i_formatorenta,
+        i.genero as i_genero
+        from VI_ITEMS as i
+        where i.id = #{idit}
+    </select>
+
     <resultMap id="ItemResult" type="Item">
         <id property="id" column="i_id" />
         <result property="nombre" column="i_nombre" />
